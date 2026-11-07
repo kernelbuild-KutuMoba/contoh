@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catatan Keuangan</title>
+
+<style>
+:root {
+    --primary: #2c3e50;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --secondary: #7f8c8d;
+    --background: #f4f7f6;
+    --teal: #16a085;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--background);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-top: 0;
+}
+
+.form-box {
+    background: #ebeef0;
+    padding: 18px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+/* SECTION FILTER TANGGAL */
+.filter-section {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    border: 1px solid #dcdfe6;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: var(--primary);
+}
+
+.filter-group input {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    min-width: 0;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    padding: 11px 16px;
+    min-height: 40px;
+}
+
+.btn-add {
+    background: var(--success);
+    width: 100%;
+}
+
+.btn-add:hover {
+    background: #219653;
+}
+
+.btn-reset {
+    background: var(--secondary);
+    min-height: 38px;
+    padding: 9px 15px;
+    font-size: 13px;
+}
+
+.btn-reset:hover {
+    background: #6c7a7d;
+}
+
+.form-button {
+    grid-column: 1 / -1;
+}
+
+/* KOTAK RINGKASAN TERKUMPUL KHUSUS */
+.summary-card {
+    background: #e8f8f5;
+    border: 2px solid var(--teal);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(22, 160, 133, 0.12);
+}
+
+.summary-title {
+    font-weight: bold;
+    color: #117a65;
+    font-size: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #a3e4d7;
+    padding-bottom: 8px;
+}
+
+.summary-title small {
+    display: block;
+    font-weight: normal;
+    color: #555;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.summary-item {
+    background: #ffffff;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid #d1f2eb;
+}
+
+.summary-item span {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.summary-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #117a65;
+}
+
+.summary-value.text-danger {
+    color: var(--danger);
+}
+
+.summary-value.text-success {
+    color: var(--success);
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    min-width: 650px;
+}
+
+th, td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+    white-space: nowrap;
+}
+
+tr:hover {
+    background: #f9f9f9;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.highlight-tgl4 {
+    background: #e8f8f5 !important;
+    font-weight: bold;
+}
+
+.btn-delete {
+    background: var(--danger);
+    padding: 7px 10px;
+    font-size: 12px;
+    min-height: 32px;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+/* KARTU MOBILE */
+.mobile-list {
+    display: none;
+}
+
+.card-transaction {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.04);
+}
+
+.card-transaction.highlight-tgl4 {
+    border: 2px solid #1abc9c;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.card-date {
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.card-description {
+    font-weight: 600;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+.card-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.card-detail div {
+    background: #f5f7f8;
+    padding: 9px;
+    border-radius: 6px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.card-detail small {
+    display: block;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.card-detail strong {
+    font-size: 13px;
+}
+
+.empty-data {
+    text-align: center;
+    padding: 25px;
+    color: #888;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .form-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .container {
+        padding: 18px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .form-button {
+        grid-column: auto;
+    }
+
+    .form-box {
+        padding: 12px;
+    }
+
+    .table-wrapper {
+        display: none;
+    }
+
+    .mobile-list {
+        display: block;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Catatan Keuangan</h2>
+
+<div class="form-box">
+    <!-- BAGIAN FILTER TANGGAL -->
+    <div class="filter-section">
+        <div class="filter-group">
+            <label for="filter-tgl">🔍 Filter Tanggal:</label>
+            <input type="date" id="filter-tgl">
+        </div>
+        <button type="button" class="btn-reset" id="btn-reset-filter">
+            Tampilkan Semua
+        </button>
+    </div>
+
+    <!-- FORM INPUT TRANSAKSI -->
+    <form id="finance-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="input-tgl">Tanggal Transaksi</label>
+                <input type="date" id="input-tgl" required>
+            </div>
+
+            <div class="form-group">
+                <label for="input-ket">Nama Pemesan</label>
+                <input type="text" id="input-ket" placeholder="nama pemesan" required>
+            </div>
+
+            <div class="form-group">
+                <label for="input-keluar">Keluar (-)</label>
+                <input type="number" id="input-keluar" value="0" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="input-masuk">Masuk (+)</label>
+                <input type="number" id="input-masuk" value="0" min="0">
+            </div>
+
+            <div class="form-button">
+                <button type="submit" class="btn-add">
+                    KONFIRMASI
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- KOTAK RINGKASAN TERKUMPUL KHUSUS -->
+<div class="summary-card" id="summary-box">
+    <div class="summary-title" id="summary-title-text">
+        Total Terkumpul Periode Ini
+        <small>Akumulasi seluruh transaksi</small>
+    </div>
+    <div class="summary-grid">
+        <div class="summary-item">
+            <span>Akumulasi Keluar (-)</span>
+            <div class="summary-value text-danger" id="summary-keluar">Rp0</div>
+        </div>
+        <div class="summary-item">
+            <span>Akumulasi Masuk (+)</span>
+            <div class="summary-value text-success" id="summary-masuk">Rp0</div>
+        </div>
+        <div class="summary-item">
+            <span>Total Laba (Masuk - Keluar)</span>
+            <div class="summary-value" id="summary-selisih">Rp0</div>
+        </div>
+    </div>
+</div>
+
+<!-- TAMPILAN DESKTOP -->
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+    <th>Tanggal</th>
+    <th>Nama Pemesan</th>
+    <th class="text-right">Keluar (-)</th>
+    <th class="text-right">Masuk (+)</th>
+    <th>Aksi</th>
+</tr>
+</thead>
+
+<tbody id="transaction-table"></tbody>
+</table>
+</div>
+
+<!-- TAMPILAN MOBILE -->
+<div class="mobile-list" id="mobile-list"></div>
+
+</div>
+
+<script>
+
+let databaseTransaksi = [];
+const inputTanggal = document.getElementById('input-tgl');
+
+// Fungsi untuk mengatur nilai tanggal input ke hari ini secara presisi (Format: YYYY-MM-DD)
+function setTanggalHariIni() {
+    const today = new Date();
+    const tahun = today.getFullYear();
+    const bulan = String(today.getMonth() + 1).padStart(2, '0');
+    const hari = String(today.getDate()).padStart(2, '0');
+    inputTanggal.value = `${tahun}-${bulan}-${hari}`;
+}
+
+// Set tanggal pertama kali saat halaman dimuat
+setTanggalHariIni();
+
+const filterTanggal = document.getElementById('filter-tgl');
+const btnResetFilter = document.getElementById('btn-reset-filter');
+
+// EVENT LISTENER FILTER
+filterTanggal.addEventListener('change', renderTabel);
+
+btnResetFilter.addEventListener('click', () => {
+    filterTanggal.value = '';
+    renderTabel();
+});
+
+// FUNGSI LOAD DATA DARI data.json DI GITHUB
+async function muatDataJSON() {
+    try {
+        const response = await fetch('data.json');
+        if (!response.ok) {
+            throw new Error('Gagal mengambil file data.json');
+        }
+        const data = await response.json();
+        databaseTransaksi = Array.isArray(data) ? data : [];
+        renderTabel();
+    } catch (error) {
+        console.error('Error memuat data:', error);
+        databaseTransaksi = [];
+        renderTabel();
+    }
+}
+
+function formatRupiah(angka) {
+    const num = Number(angka) || 0;
+    if (num === 0) return 'Rp0';
+    return 'Rp' + num.toLocaleString('id-ID');
+}
+
+function formatTanggal(tanggal) {
+    if (!tanggal) return '';
+    const [tahun, bulan, hari] = tanggal.split('-');
+    return `${hari}/${bulan}/${tahun}`;
+}
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+    })[char]);
+}
+
+// Fungsi konversi string YYYY-MM-DD ke format angka YYYYMMDD
+function parseDateNum(dateStr) {
+    if (!dateStr) return 0;
+    const clean = dateStr.split('T')[0];
+    return Number(clean.replace(/-/g, ''));
+}
+
+function renderTabel() {
+    const tbody = document.getElementById('transaction-table');
+    const mobile = document.getElementById('mobile-list');
+    const summaryMasukEl = document.getElementById('summary-masuk');
+    const summaryKeluarEl = document.getElementById('summary-keluar');
+    const summarySelisihEl = document.getElementById('summary-selisih');
+    const summaryTitleText = document.getElementById('summary-title-text');
+
+    tbody.innerHTML = '';
+    mobile.innerHTML = '';
+
+    // Ambil tanggal referensi dari filter ATAU input form ATAU tanggal hari ini
+    let refDateStr = filterTanggal.value || inputTanggal.value;
+    if (!refDateStr) {
+        const today = new Date();
+        const thn = today.getFullYear();
+        const bln = String(today.getMonth() + 1).padStart(2, '0');
+        const hri = String(today.getDate()).padStart(2, '0');
+        refDateStr = `${thn}-${bln}-${hri}`;
+    }
+
+    const [y, m, d] = refDateStr.split('-').map(Number);
+
+    // Hitung Siklus Tanggal 4 (Rentang dari tanggal 5 bulan lalu s.d. tanggal 3 bulan pencairan)
+    let targetYear = y;
+    let targetMonth = m; // 1-12
+
+    if (d >= 4) {
+        targetMonth = m + 1;
+        if (targetMonth > 12) {
+            targetMonth = 1;
+            targetYear++;
+        }
+    }
+
+    const strTargetMonth = String(targetMonth).padStart(2, '0');
+
+    // Hitung tanggal awal rentang (Tanggal 5 bulan sebelumnya dari tanggal pencairan)
+    let startMonth = targetMonth - 1;
+    let startYear = targetYear;
+    if (startMonth < 1) {
+        startMonth = 12;
+        startYear--;
+    }
+    const strStartMonth = String(startMonth).padStart(2, '0');
+
+    // Angka pembanding (YYYYMMDD)
+    const startNum = Number(`${startYear}${strStartMonth}05`);
+    const endNum = Number(`${targetYear}${strTargetMonth}03`);
+
+    // Tampilkan label informasi pada kotak ringkasan
+    summaryTitleText.innerHTML = `
+        Total Terkumpul Periode Ini
+        <small>Akumulasi transaksi (05/${strStartMonth}/${startYear} s.d. 03/${strTargetMonth}/${targetYear})</small>
+    `;
+
+    // Sort data berdasarkan tanggal dan ID
+    let sortedData = [...databaseTransaksi].sort((a,b) =>
+        a.tanggal.localeCompare(b.tanggal) || a.id - b.id
+    );
+
+    // FILTER TANGGAL: Jika input filter diisi, saring data sesuai tanggal yang dipilih
+    const selectedDate = filterTanggal.value;
+    const dataToRender = selectedDate 
+        ? sortedData.filter(item => item.tanggal === selectedDate)
+        : sortedData;
+
+    // HITUNG AKUMULASI MASUK DAN KELUAR PADA RENTANG TANGGAL 5 S.D 3
+    let akumulasiMasukPeriode = 0;
+    let akumulasiKeluarPeriode = 0;
+
+    databaseTransaksi.forEach(item => {
+        if (item.tanggal) {
+            const itemNum = parseDateNum(item.tanggal);
+            if (itemNum >= startNum && itemNum <= endNum) {
+                akumulasiMasukPeriode += Number(item.masuk) || 0;
+                akumulasiKeluarPeriode += Number(item.keluar) || 0;
+            }
+        }
+    });
+
+    // HITUNG SELISIH (Masuk - Keluar)
+    const selisihPeriode = akumulasiMasukPeriode - akumulasiKeluarPeriode;
+
+    // TAMPILKAN HASILNYA DI KOTAK RINGKASAN KHUSUS
+    summaryMasukEl.textContent = formatRupiah(akumulasiMasukPeriode);
+    summaryKeluarEl.textContent = formatRupiah(akumulasiKeluarPeriode);
+    summarySelisihEl.textContent = formatRupiah(Math.abs(selisihPeriode));
+    
+    if (selisihPeriode < 0) {
+        summarySelisihEl.textContent = '-' + formatRupiah(Math.abs(selisihPeriode));
+        summarySelisihEl.className = 'summary-value text-danger';
+    } else {
+        summarySelisihEl.className = 'summary-value text-success';
+    }
+
+    if (dataToRender.length === 0) {
+        const pesanKosong = selectedDate 
+            ? `Belum ada transaksi pada tanggal ${formatTanggal(selectedDate)}` 
+            : 'Belum ada transaksi';
+
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-data">${pesanKosong}</td></tr>`;
+        mobile.innerHTML = `<div class="empty-data">${pesanKosong}</div>`;
+        return;
+    }
+
+    dataToRender.forEach((item) => {
+        const itemNum = parseDateNum(item.tanggal);
+        const isTanggal4 = Number(item.tanggal.split('-')[2]) === 4;
+        const isInPeriode = itemNum >= startNum && itemNum <= endNum;
+        const keterangan = escapeHTML(item.keterangan);
+        const tanggal = formatTanggal(item.tanggal);
+
+        // TAMPILAN DESKTOP
+        const tr = document.createElement('tr');
+        if (isTanggal4 || isInPeriode) {
+            tr.classList.add('highlight-tgl4');
+        }
+
+        tr.innerHTML = `
+            <td>${tanggal}</td>
+            <td>${keterangan}</td>
+            <td class="text-right">${formatRupiah(Number(item.keluar))}</td>
+            <td class="text-right">${formatRupiah(Number(item.masuk))}</td>
+            <td>
+                <button class="btn-delete" onclick="hapusTransaksi(${Number(item.id)})">
+                    Hapus
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+
+        // TAMPILAN MOBILE
+        const card = document.createElement('div');
+        card.className = 'card-transaction';
+
+        if (isTanggal4 || isInPeriode) {
+            card.classList.add('highlight-tgl4');
+        }
+
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="card-date">${tanggal}</span>
+                <button class="btn-delete" onclick="hapusTransaksi(${Number(item.id)})">
+                    Hapus
+                </button>
+            </div>
+
+            <div class="card-description">
+                ${keterangan}
+            </div>
+
+            <div class="card-detail">
+                <div>
+                    <small>Keluar (-)</small>
+                    <strong>${formatRupiah(Number(item.keluar))}</strong>
+                </div>
+
+                <div>
+                    <small>Masuk (+)</small>
+                    <strong>${formatRupiah(Number(item.masuk))}</strong>
+                </div>
+            </div>
+        `;
+        mobile.appendChild(card);
+    });
+}
+
+// TAMBAH TRANSAKSI (Hanya mengubah tampilan lokal sementara)
+document.getElementById('finance-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const tanggal = document.getElementById('input-tgl').value;
+    const keterangan = document.getElementById('input-ket').value.trim();
+    const keluar = Number(document.getElementById('input-keluar').value) || 0;
+    const masuk = Number(document.getElementById('input-masuk').value) || 0;
+
+    if (!tanggal || !keterangan) return;
+
+    if (keluar < 0 || masuk < 0) {
+        alert('Nominal tidak boleh negatif');
+        return;
+    }
+
+    if (keluar === 0 && masuk === 0) {
+        alert('Masukkan nominal keluar atau masuk');
+        return;
+    }
+
+    databaseTransaksi.push({
+        id: Date.now(),
+        tanggal: tanggal,
+        keterangan: keterangan,
+        keluar: keluar,
+        masuk: masuk
+    });
+
+    document.getElementById('input-ket').value = '';
+    document.getElementById('input-keluar').value = '0';
+    document.getElementById('input-masuk').value = '0';
+    setTanggalHariIni();
+
+    renderTabel();
+    alert('Catatan ditambahkan secara lokal (perubahan belum tersimpan permanen ke file data.json di GitHub).');
+});
+
+// HAPUS TRANSAKSI (Hanya mengubah tampilan lokal sementara)
+window.hapusTransaksi = function(id) {
+    if (!confirm('Hapus catatan ini?')) return;
+
+    databaseTransaksi = databaseTransaksi.filter(item => item.id !== id);
+    renderTabel();
+};
+
+// JALANKAN PERTAMA KALI UNTUK MENGAMBIL DATA DARI data.json
+muatDataJSON();
+
+// MEMPERBARUI TANGGAL SECARA OTOMATIS SAAT TAB/JENDELA KEMBALI DIFOKUSKAN
+window.addEventListener('focus', () => {
+    setTanggalHariIni();
+});
+
+</script>
+
+</body>
+</html>
