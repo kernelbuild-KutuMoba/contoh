@@ -118,5 +118,13 @@
     "metode": "tunai",
     "keluar": 50000,
     "masuk": 55000
+  },
+  {
+    "id": 1794159991047,
+    "tanggal": "2026-11-08",
+    "keterangan": "Aji kunto",
+    "keluar": 0,
+    "masuk": 0,
+    "transfer": 150000
   }
 ]
