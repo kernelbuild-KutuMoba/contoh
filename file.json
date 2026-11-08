@@ -126,13 +126,5 @@
     "keluar": 150000,
     "masuk": 0,
     "transfer": 150000
-  },
-  {
-    "id": 1794163477555,
-    "tanggal": "2026-11-09",
-    "keterangan": "Contoh",
-    "keluar": 200000,
-    "masuk": 0,
-    "transfer": 205000
   }
 ]
