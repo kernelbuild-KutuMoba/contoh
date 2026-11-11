@@ -114,5 +114,13 @@
     "keluar": 101000,
     "masuk": 106000,
     "transfer": 0
+  },
+  {
+    "id": 1794401967494,
+    "tanggal": "2026-11-11",
+    "keterangan": "Akudewe",
+    "keluar": 300000,
+    "masuk": 305000,
+    "transfer": 0
   }
 ]
