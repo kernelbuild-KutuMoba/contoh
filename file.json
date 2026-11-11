@@ -122,5 +122,13 @@
     "keluar": 300000,
     "masuk": 305000,
     "transfer": 0
+  },
+  {
+    "id": 1794402568149,
+    "tanggal": "2026-11-11",
+    "keterangan": "Honok rw3",
+    "keluar": 250000,
+    "masuk": 260000,
+    "transfer": 0
   }
 ]
