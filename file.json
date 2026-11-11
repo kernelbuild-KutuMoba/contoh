@@ -226,5 +226,13 @@
     "keluar": 145000,
     "masuk": 150000,
     "transfer": 0
+  },
+  {
+    "id": 1794429684776,
+    "tanggal": "2026-11-05",
+    "keterangan": "Siget",
+    "keluar": 50000,
+    "masuk": 55000,
+    "transfer": 0
   }
 ]
