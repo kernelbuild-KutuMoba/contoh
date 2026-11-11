@@ -186,5 +186,13 @@
     "keluar": 195000,
     "masuk": 200000,
     "transfer": 0
+  },
+  {
+    "id": 1794416157934,
+    "tanggal": "2026-11-11",
+    "keterangan": "Aji kunto",
+    "keluar": 150000,
+    "masuk": 155000,
+    "transfer": 0
   }
 ]
