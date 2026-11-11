@@ -218,5 +218,13 @@
     "keluar": 300000,
     "masuk": 305000,
     "transfer": 0
+  },
+  {
+    "id": 1794421697775,
+    "tanggal": "2026-11-12",
+    "keterangan": "Danang",
+    "keluar": 145000,
+    "masuk": 150000,
+    "transfer": 0
   }
 ]
