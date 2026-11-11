@@ -266,13 +266,5 @@
     "keluar": 0,
     "masuk": 0,
     "transfer": 700000
-  },
-  {
-    "id": 1794432666749,
-    "tanggal": "2026-11-12",
-    "keterangan": "Contoh2",
-    "keluar": 0,
-    "masuk": 600000,
-    "transfer": 0
   }
 ]
