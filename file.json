@@ -282,5 +282,13 @@
     "keluar": 100000,
     "masuk": 105000,
     "transfer": 0
+  },
+  {
+    "id": 1794501696233,
+    "tanggal": "2026-11-12",
+    "keterangan": "Dori",
+    "keluar": 100000,
+    "masuk": 105000,
+    "transfer": 0
   }
 ]
