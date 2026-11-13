@@ -346,5 +346,13 @@
     "keluar": 300000,
     "masuk": 305000,
     "transfer": 0
+  },
+  {
+    "id": 1794603128379,
+    "tanggal": "2026-11-14",
+    "keterangan": "Kunto",
+    "keluar": 200000,
+    "masuk": 210000,
+    "transfer": 0
   }
 ]
