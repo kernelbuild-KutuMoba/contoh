@@ -378,5 +378,13 @@
     "keluar": 1490000,
     "masuk": 1500000,
     "transfer": 0
+  },
+  {
+    "id": 1794652011954,
+    "tanggal": "2026-11-14",
+    "keterangan": "Jeri gp",
+    "keluar": 390000,
+    "masuk": 400000,
+    "transfer": 0
   }
 ]
