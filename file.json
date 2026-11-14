@@ -386,5 +386,13 @@
     "keluar": 390000,
     "masuk": 400000,
     "transfer": 0
+  },
+  {
+    "id": 1794666169255,
+    "tanggal": "2026-11-14",
+    "keterangan": "Giri",
+    "keluar": 100000,
+    "masuk": 110000,
+    "transfer": 0
   }
 ]
