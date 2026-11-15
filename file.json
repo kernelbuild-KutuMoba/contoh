@@ -394,5 +394,13 @@
     "keluar": 100000,
     "masuk": 110000,
     "transfer": 0
+  },
+  {
+    "id": 1794743862026,
+    "tanggal": "2026-11-15",
+    "keterangan": "Lek wid",
+    "keluar": 50000,
+    "masuk": 55000,
+    "transfer": 0
   }
 ]
