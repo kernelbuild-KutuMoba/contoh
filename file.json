@@ -482,5 +482,13 @@
     "keluar": 120000,
     "masuk": 125000,
     "transfer": 0
+  },
+  {
+    "id": 1794928147200,
+    "tanggal": "2026-11-17",
+    "keterangan": "Lek juli",
+    "keluar": 95000,
+    "masuk": 100000,
+    "transfer": 0
   }
 ]
