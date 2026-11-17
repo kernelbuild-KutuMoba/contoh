@@ -514,5 +514,13 @@
     "keluar": 50000,
     "masuk": 55000,
     "transfer": 0
+  },
+  {
+    "id": 1794935521513,
+    "tanggal": "2026-11-18",
+    "keterangan": "Erwin",
+    "keluar": 195000,
+    "masuk": 200000,
+    "transfer": 0
   }
 ]
