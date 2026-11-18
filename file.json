@@ -578,5 +578,13 @@
     "keluar": 100000,
     "masuk": 105000,
     "transfer": 0
+  },
+  {
+    "id": 1795022807693,
+    "tanggal": "2026-11-19",
+    "keterangan": "Riot",
+    "keluar": 60000,
+    "masuk": 65000,
+    "transfer": 0
   }
 ]
