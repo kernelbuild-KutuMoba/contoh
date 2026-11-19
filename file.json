@@ -602,5 +602,13 @@
     "keluar": 155000,
     "masuk": 160000,
     "transfer": 0
+  },
+  {
+    "id": 1795095703195,
+    "tanggal": "2026-11-19",
+    "keterangan": "Rini",
+    "keluar": 400000,
+    "masuk": 405000,
+    "transfer": 0
   }
 ]
