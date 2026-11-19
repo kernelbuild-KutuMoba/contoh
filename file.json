@@ -594,5 +594,13 @@
     "keluar": 1000000,
     "masuk": 1010000,
     "transfer": 0
+  },
+  {
+    "id": 1795072791268,
+    "tanggal": "2026-11-19",
+    "keterangan": "Alex",
+    "keluar": 55000,
+    "masuk": 60000,
+    "transfer": 0
   }
 ]
