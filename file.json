@@ -626,5 +626,13 @@
     "keluar": 145000,
     "masuk": 150000,
     "transfer": 0
+  },
+  {
+    "id": 1795185745854,
+    "tanggal": "2026-11-20",
+    "keterangan": "Putra",
+    "keluar": 50000,
+    "masuk": 55000,
+    "transfer": 0
   }
 ]
