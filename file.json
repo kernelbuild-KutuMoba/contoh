@@ -642,5 +642,13 @@
     "keluar": 95000,
     "masuk": 100000,
     "transfer": 0
+  },
+  {
+    "id": 1795276019933,
+    "tanggal": "2026-11-21",
+    "keterangan": "Entut",
+    "keluar": 50000,
+    "masuk": 55000,
+    "transfer": 0
   }
 ]
