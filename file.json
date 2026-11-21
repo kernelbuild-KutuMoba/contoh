@@ -634,5 +634,13 @@
     "keluar": 50000,
     "masuk": 55000,
     "transfer": 0
+  },
+  {
+    "id": 1795269138135,
+    "tanggal": "2026-11-21",
+    "keterangan": "Mul gunong payong",
+    "keluar": 95000,
+    "masuk": 100000,
+    "transfer": 0
   }
 ]
